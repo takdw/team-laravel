@@ -26,7 +26,7 @@ class TeamPlayerController extends Controller
             'first_name' => request()->first_name,
             'last_name' => request()->last_name,
             'birthdate' => request()->birthdate,
-            'photo' => request()->photo->store('photos', 'public'),
+            'photo' => request()->photo,
         ]);
 
         return response()->json($player, 201);

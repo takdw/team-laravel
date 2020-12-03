@@ -7,8 +7,6 @@ use App\Models\Team;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class AddPlayerTest extends TestCase
@@ -18,15 +16,13 @@ class AddPlayerTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        Storage::fake();
-
         $team = Team::factory()->create();
 
         $response = $this->postJson("/api/v1/teams/{$team->id}/players", [
             'first_name' => 'First',
             'last_name' => 'Last',
             'birthdate' => '1993-11-27',
-            'photo' => UploadedFile::fake()->image('photo.jpg'),
+            'photo' => 'http://some-address-from-cloudinary.com/photoid',
         ]);
 
         $response->assertStatus(201)
@@ -34,28 +30,27 @@ class AddPlayerTest extends TestCase
                 'first_name' => 'First',
                 'last_name' => 'Last',
                 'team_id' => $team->id,
+                'photo' => 'http://some-address-from-cloudinary.com/photoid',
             ]);
         $this->assertCount(1, Player::all());
         tap(Player::first(), function ($player) use ($team) {
             $this->assertEquals('First', $player->first_name);
             $this->assertEquals('Last', $player->last_name);
+            $this->assertEquals('http://some-address-from-cloudinary.com/photoid', $player->photo);
             $this->assertTrue($player->birthdate->equalTo(Carbon::parse('1993-11-27')));
             $this->assertTrue($player->team->is($team));
-            Storage::disk('public')->assertExists($team->photo);
         });
     }
 
     /** @test */
     public function firstNameIsRequired()
     {
-        Storage::fake();
-
         $team = Team::factory()->create();
 
         $response = $this->postJson("/api/v1/teams/{$team->id}/players", [
             'last_name' => 'Last',
             'birthdate' => '1993-11-27',
-            'photo' => UploadedFile::fake()->image('photo.jpg'),
+            'photo' => 'http://some-address-from-cloudinary.com/photoid',
         ]);
 
         $response->assertStatus(422)
@@ -66,14 +61,12 @@ class AddPlayerTest extends TestCase
     /** @test */
     public function lastNameIsRequired()
     {
-        Storage::fake();
-
         $team = Team::factory()->create();
 
         $response = $this->postJson("/api/v1/teams/{$team->id}/players", [
             'first_name' => 'First',
             'birthdate' => '1993-11-27',
-            'photo' => UploadedFile::fake()->image('photo.jpg'),
+            'photo' => 'http://some-address-from-cloudinary.com/photoid',
         ]);
 
         $response->assertStatus(422)
@@ -84,14 +77,12 @@ class AddPlayerTest extends TestCase
     /** @test */
     public function birthIsRequired()
     {
-        Storage::fake();
-
         $team = Team::factory()->create();
 
         $response = $this->postJson("/api/v1/teams/{$team->id}/players", [
             'first_name' => 'First',
             'last_name' => 'Last',
-            'photo' => UploadedFile::fake()->image('photo.jpg'),
+            'photo' => 'http://some-address-from-cloudinary.com/photoid',
         ]);
 
         $response->assertStatus(422)
@@ -102,8 +93,6 @@ class AddPlayerTest extends TestCase
     /** @test */
     public function photoIsRequired()
     {
-        Storage::fake();
-
         $team = Team::factory()->create();
 
         $response = $this->postJson("/api/v1/teams/{$team->id}/players", [
