@@ -3,7 +3,9 @@
 namespace Database\Factories;
 
 use App\Models\Player;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Http\UploadedFile;
 
 class PlayerFactory extends Factory
 {
@@ -22,7 +24,10 @@ class PlayerFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'first_name' => $this->faker->firstName,
+            'last_name' => $this->faker->lastName,
+            'birthdate' => Carbon::parse($this->faker->date),
+            'photo' => UploadedFile::fake()->image('photo.jpg')->store('photos', 'public'),
         ];
     }
 }
