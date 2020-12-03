@@ -24,4 +24,16 @@ class Player extends Model
     {
         return $this->belongsTo(Team::class);
     }
+
+    public function getAgeAttribute()
+    {
+        return $this->birthdate->age;
+    }
+
+    public function toArray()
+    {
+        return parent::toArray() + [
+            'age' => $this->age,
+        ];
+    }
 }
