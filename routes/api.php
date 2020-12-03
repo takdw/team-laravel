@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TeamPlayerController;
 use App\Http\Controllers\TeamController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,4 +22,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::prefix('core')->group(function () {
     Route::post('/teams', [TeamController::class, 'store']);
+    Route::post('/teams/{team}/players', [TeamPlayerController::class, 'store']);
 });
