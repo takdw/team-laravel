@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class TeamPlayerController extends Controller
 {
+    public function index(Team $team)
+    {
+        return response()->json($team->players, 200);
+    }
+    
     public function store(Team $team)
     {
         request()->validate([

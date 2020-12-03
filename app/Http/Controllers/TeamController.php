@@ -23,4 +23,9 @@ class TeamController extends Controller
 
         return response()->json($team, 201);
     }
+
+    public function show(Team $team)
+    {
+        return response()->json($team, 200);
+    }
 }

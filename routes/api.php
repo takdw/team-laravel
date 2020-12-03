@@ -22,6 +22,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::prefix('v1')->group(function () {
     Route::post('/teams', [TeamController::class, 'store']);
+    Route::get('/teams/{team}', [TeamController::class, 'show']);
+    Route::get('/teams/{team}/players', [TeamPlayerController::class, 'index']);
     Route::post('/teams/{team}/players', [TeamPlayerController::class, 'store']);
     Route::post('/teams/{team}/players/{player}/edit', [TeamPlayerController::class, 'update']);
 });
