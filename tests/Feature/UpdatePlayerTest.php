@@ -30,7 +30,7 @@ class UpdatePlayerTest extends TestCase
             'team_id' => $team->id,
         ]);
 
-        $response = $this->postJson("/api/core/teams/{$team->id}/players/{$player->id}/edit", [
+        $response = $this->postJson("/api/v1/teams/{$team->id}/players/{$player->id}/edit", [
             'first_name' => 'Updated First Name',
             'last_name' => 'Updated Last Name',
             'birthdate' => '1996-11-11',

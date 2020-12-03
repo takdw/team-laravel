@@ -20,7 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('core')->group(function () {
+Route::prefix('v1')->group(function () {
     Route::post('/teams', [TeamController::class, 'store']);
     Route::post('/teams/{team}/players', [TeamPlayerController::class, 'store']);
     Route::post('/teams/{team}/players/{player}/edit', [TeamPlayerController::class, 'update']);

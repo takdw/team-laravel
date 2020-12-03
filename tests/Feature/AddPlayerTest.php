@@ -22,7 +22,7 @@ class AddPlayerTest extends TestCase
 
         $team = Team::factory()->create();
 
-        $response = $this->postJson("/api/core/teams/{$team->id}/players", [
+        $response = $this->postJson("/api/v1/teams/{$team->id}/players", [
             'first_name' => 'First',
             'last_name' => 'Last',
             'birthdate' => '1993-11-27',
@@ -52,7 +52,7 @@ class AddPlayerTest extends TestCase
 
         $team = Team::factory()->create();
 
-        $response = $this->postJson("/api/core/teams/{$team->id}/players", [
+        $response = $this->postJson("/api/v1/teams/{$team->id}/players", [
             'last_name' => 'Last',
             'birthdate' => '1993-11-27',
             'photo' => UploadedFile::fake()->image('photo.jpg'),
@@ -70,7 +70,7 @@ class AddPlayerTest extends TestCase
 
         $team = Team::factory()->create();
 
-        $response = $this->postJson("/api/core/teams/{$team->id}/players", [
+        $response = $this->postJson("/api/v1/teams/{$team->id}/players", [
             'first_name' => 'First',
             'birthdate' => '1993-11-27',
             'photo' => UploadedFile::fake()->image('photo.jpg'),
@@ -88,7 +88,7 @@ class AddPlayerTest extends TestCase
 
         $team = Team::factory()->create();
 
-        $response = $this->postJson("/api/core/teams/{$team->id}/players", [
+        $response = $this->postJson("/api/v1/teams/{$team->id}/players", [
             'first_name' => 'First',
             'last_name' => 'Last',
             'photo' => UploadedFile::fake()->image('photo.jpg'),
@@ -106,7 +106,7 @@ class AddPlayerTest extends TestCase
 
         $team = Team::factory()->create();
 
-        $response = $this->postJson("/api/core/teams/{$team->id}/players", [
+        $response = $this->postJson("/api/v1/teams/{$team->id}/players", [
             'first_name' => 'First',
             'last_name' => 'Last',
             'birthdate' => '1993-11-27',

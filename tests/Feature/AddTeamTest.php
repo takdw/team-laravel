@@ -15,7 +15,7 @@ class AddTeamTest extends TestCase
     {
         Storage::fake();
 
-        $response = $this->postJson('/api/core/teams', [
+        $response = $this->postJson('/api/v1/teams', [
             'name' => 'Test Name',
             'logo' => UploadedFile::fake()->image('logo.jpg'),
             'description' => 'Test Team Description',
@@ -39,7 +39,7 @@ class AddTeamTest extends TestCase
     {
         Storage::fake();
 
-        $response = $this->postJson('/api/core/teams', [
+        $response = $this->postJson('/api/v1/teams', [
             'logo' => UploadedFile::fake()->image('logo.jpg'),
             'description' => 'Test Team Description',
         ]);
@@ -56,7 +56,7 @@ class AddTeamTest extends TestCase
 
         Storage::fake();
 
-        $response = $this->postJson('/api/core/teams', [
+        $response = $this->postJson('/api/v1/teams', [
             'name' => 'Test Name',
             'logo' => UploadedFile::fake()->image('logo.jpg'),
         ]);
@@ -80,7 +80,7 @@ class AddTeamTest extends TestCase
         
         Storage::fake();
 
-        $response = $this->postJson('/api/core/teams', [
+        $response = $this->postJson('/api/v1/teams', [
             'name' => 'Test Name',
             'description' => 'Test Description',
         ]);
