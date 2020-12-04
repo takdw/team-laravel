@@ -41,10 +41,6 @@ class TeamPlayerController extends Controller
             'photo' => ['required', 'sometimes'],
         ]);
 
-        if (isset($validated['photo'])) {
-            $validated['photo'] = request()->photo->store('photos', 'public');
-        }
-
         $player->update($validated);
 
         return response()->json($player, 200);
