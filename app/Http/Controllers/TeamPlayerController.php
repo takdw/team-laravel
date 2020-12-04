@@ -12,6 +12,11 @@ class TeamPlayerController extends Controller
     {
         return response()->json($team->players, 200);
     }
+
+    public function show(Team $team, Player $player)
+    {
+        return response()->json($player, 200);
+    }
     
     public function store(Team $team)
     {

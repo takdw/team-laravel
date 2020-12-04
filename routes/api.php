@@ -26,5 +26,6 @@ Route::prefix('v1')->group(function () {
     Route::get('/teams/{team}', [TeamController::class, 'show']);
     Route::get('/teams/{team}/players', [TeamPlayerController::class, 'index']);
     Route::post('/teams/{team}/players', [TeamPlayerController::class, 'store']);
+    Route::get('/teams/{team}/players/{player}', [TeamPlayerController::class, 'show']);
     Route::post('/teams/{team}/players/{player}/edit', [TeamPlayerController::class, 'update']);
 });
