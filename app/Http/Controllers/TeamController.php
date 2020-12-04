@@ -31,6 +31,17 @@ class TeamController extends Controller
 
     public function show(Team $team)
     {
+        $allowedIncludes = ['players'];
+
+        if (request()->has('with')) {
+            $loads = explode(',', request()->with);
+            foreach ($loads as $load) {
+                if (array_search($load, $allowedIncludes) !== false) {
+                    $team->load($load);
+                }
+            }
+        }
+
         return response()->json($team, 200);
     }
 }

@@ -35,6 +35,21 @@ class TeamsTest extends TestCase
     }
 
     /** @test */
+    public function canLoadPlayersWithTeam()
+    {
+        $team = Team::factory()->create([
+            'name' => 'Kickass Team',
+        ]);
+
+        $this->getJson("/api/v1/teams/{$team->id}?with=players")
+            ->assertStatus(200)
+            ->assertJson([
+                'name' => 'Kickass Team',
+                'players' => [],
+            ]);
+    }
+
+    /** @test */
     public function gettingTeamPlayers()
     {
         $team = Team::factory()->create();
